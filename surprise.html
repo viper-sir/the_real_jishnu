@@ -1,6 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
+<title>Happy Valentine</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: black;
+    cursor: crosshair;
+}
+
+canvas {
+    display: block;
+}
+
+/* BLUE NEON glowing text */
+.text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Dancing Script', cursive;
+    font-size: 38px;
+    font-weight: 700;
+    text-align: center;
+    pointer-events: none;
+    letter-spacing: 3px;
+    line-height: 1.6;
+    color: #4fd9ff;
+
+    text-shadow:
+        0 0 5px #4fd9ff,
+        0 0 10px #4fd9ff,
+        0 0 20px #2fc8ff,
+        0 0 40px #1fb8ff,
+        0 0 80px #0fa8ff;
+
+    animation: neonPulse 2s infinite alternate;
+}
+
+@keyframes neonPulse {
+    from {
+        text-shadow:
+            0 0 5px #4fd9ff,
+            0 0 10px #4fd9ff,
+            0 0 20px #2fc8ff;
+    }
+    to {
+        text-shadow:
+            0 0 15px #8aeaff,
+            0 0 40px #4fd9ff,
+            0 0 90px #0fa8ff;
+    }
+}
+.fade-out {
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    pointer-events: none;
+}
+
+</style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<div class="text">
+    I LOVE YOU <br>
+    Devuttyyy <br>
+    🐼🍫 <br>
+    HAPPY VALANTINE'S DAY......!
+</div>
+
+<div id="mainContent" style="display:none;">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery - Mysteries of Love</title>
@@ -336,8 +413,6 @@
     cursor: not-allowed;
 }
     </style>
-</head>
-<body>
 
 <header class="navbar">
     <div class="logo">WooahH</div>
@@ -645,5 +720,121 @@ function resetGame() {
     });
 }
 </script>
+</div>
+
+
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+let w, h;
+function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resize);
+resize();
+
+const hearts = [];
+const mouseHearts = [];
+
+/* Floating background hearts */
+function createHeart() {
+    return {
+        x: Math.random() * w,
+        y: h + 20,
+        size: Math.random() * 15 + 10,
+        speed: Math.random() * 1.5 + 0.5,
+        alpha: Math.random() * 0.6 + 0.4,
+        drift: (Math.random() - 0.5) * 1.2
+    };
+}
+
+for (let i = 0; i < 100; i++) {
+    hearts.push(createHeart());
+}
+
+/* Draw heart */
+function drawHeart(x, y, size, alpha, color = "255,120,180") {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.scale(size / 20, size / 20);
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.bezierCurveTo(0, -3, -10, -15, -20, 0);
+    ctx.bezierCurveTo(-30, 20, 0, 35, 0, 45);
+    ctx.bezierCurveTo(0, 35, 30, 20, 20, 0);
+    ctx.bezierCurveTo(10, -15, 0, -3, 0, 0);
+    ctx.closePath();
+    ctx.fillStyle = `rgba(${color}, ${alpha})`;
+    ctx.fill();
+    ctx.restore();
+}
+
+/* Mouse move hearts */
+window.addEventListener("mousemove", (e) => {
+    for (let i = 0; i < 2; i++) {
+        mouseHearts.push({
+            x: e.clientX,
+            y: e.clientY,
+            size: Math.random() * 10 + 6,
+            alpha: 1,
+            life: 30,
+            driftX: (Math.random() - 0.5) * 2,
+            driftY: Math.random() * -2 - 1
+        });
+    }
+});
+
+/* Animation */
+function animate() {
+    ctx.clearRect(0, 0, w, h);
+
+    /* Background hearts */
+    for (let heart of hearts) {
+        drawHeart(heart.x, heart.y, heart.size, heart.alpha);
+        heart.y -= heart.speed;
+        heart.x += heart.drift;
+        if (heart.y < -50) Object.assign(heart, createHeart());
+    }
+
+    /* Mouse hearts */
+    for (let i = mouseHearts.length - 1; i >= 0; i--) {
+        const hrt = mouseHearts[i];
+        drawHeart(hrt.x, hrt.y, hrt.size, hrt.alpha, "79,217,255");
+        hrt.x += hrt.driftX;
+        hrt.y += hrt.driftY;
+        hrt.alpha -= 0.03;
+        hrt.life--;
+
+        if (hrt.life <= 0) mouseHearts.splice(i, 1);
+    }
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+let revealed = false;
+
+document.addEventListener("keydown", (e) => {
+    if (e.code === "Space" && !revealed) {
+        revealed = true;
+
+        // Fade out animation
+        canvas.classList.add("fade-out");
+        document.querySelector(".text").classList.add("fade-out");
+
+        // Show main content after fade
+        setTimeout(() => {
+            canvas.style.display = "none";
+            document.querySelector(".text").style.display = "none";
+
+            document.getElementById("mainContent").style.display = "block";
+            document.body.style.overflow = "auto";
+        }, 1500);
+    }
+});
+</script>
+
 </body>
 </html>
