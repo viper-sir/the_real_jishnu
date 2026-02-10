@@ -11,7 +11,7 @@ html, body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background: black;
+    background: radial-gradient(circle at top, #2b0018, #000);
     cursor: crosshair;
 }
 
@@ -71,10 +71,11 @@ canvas {
 <canvas id="canvas"></canvas>
 
 <div class="text">
+    HAPPY VALANTINE'S DAY......! <br>
     I LOVE YOU <br>
     Devuttyyy <br>
-    🐼🍫 <br>
-    HAPPY VALANTINE'S DAY......!
+    🐼🍫
+    
 </div>
 
 <div id="mainContent" style="display:none;">
@@ -95,7 +96,7 @@ canvas {
             display: flex;
             flex-direction: column;
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)),
-                        url("images/hero-bg.jpg") no-repeat center center / cover;
+                        url("images/land.jpg") no-repeat center center / cover;
             background-attachment: fixed;
             color: white;
             font-family: 'Poppins', sans-serif;
@@ -103,20 +104,19 @@ canvas {
 
         /* --- BALANCED NAVBAR --- */
         .navbar {
-            padding: 25px 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
-        }
+    padding: 12px 40px;   /* ⬅ reduced height */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(20, 0, 10, 0.85);
+    backdrop-filter: blur(10px);
+}
+    
 
         .navbar .logo {
             font-size: 28px;
             font-weight: 600;
-            color: #00ffff;
+            color: #ff7aa2;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
@@ -131,7 +131,7 @@ canvas {
         }
 
         .navbar nav a:hover {
-            color: #00ffff;
+            color: #ff7aa2;
         }
 
         /* --- GALLERY GRID (11 Columns) --- */
@@ -162,8 +162,9 @@ canvas {
 
         .gallery-item img:hover {
             transform: scale(1.05);
-            border-color: #00ffff;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+            border-color: #ff4d6d;
+            box-shadow: 0 0 25px rgba(255, 77, 109, 0.6);
+
         }
 
         /* --- POPUP OVERLAYS --- */
@@ -210,9 +211,9 @@ canvas {
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
             border-radius: 15px;
-            border: 2px solid #00ffff;
+            border: 2px solid #ff4d6d;
             background: #0a0a0a;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 40px rgba(255, 77, 109, 0.6);
             overflow: hidden;
         }
 
@@ -250,7 +251,7 @@ canvas {
         /* --- ABOUT BOX STYLES --- */
         .about-box {
             background: rgba(10, 10, 10, 0.85);
-            border: 1px solid rgba(0, 255, 255, 0.3);
+            border: 1px solid rgba(255, 77, 109, 0.4);
             padding: 60px 40px;
             max-width: 700px;
             border-radius: 20px;
