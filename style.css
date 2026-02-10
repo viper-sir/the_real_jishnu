@@ -332,4 +332,87 @@ body {
     display: block;
 }
 
+/* =======================
+   ENCRYPTION KEY POPUP
+======================= */
+
+.key-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(6px);
+    display: none;              /* hidden by default */
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;             /* above navbar, footer, gallery */
+}
+
+/* POPUP BOX */
+.key-box {
+    background: #12131a;
+    padding: 30px 35px;
+    width: 320px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 0 35px rgba(0,255,255,0.5);
+    animation: popupScale 0.3s ease;
+}
+
+.key-box h2 {
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+/* INPUT */
+.key-box input {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #00ffff;
+    color: white;
+    outline: none;
+    margin-bottom: 20px;
+}
+
+/* BUTTONS */
+.key-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.key-actions button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(45deg, #00ffff, #ff00ff);
+    color: black;
+}
+
+.key-actions .cancel {
+    background: #444;
+    color: white;
+}
+
+/* ERROR TEXT */
+#keyError {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #ff4d4d;
+}
+
+/* POPUP ANIMATION */
+@keyframes popupScale {
+    from {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
 

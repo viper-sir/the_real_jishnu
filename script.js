@@ -1,24 +1,68 @@
-// Toggle between login and register forms
+let allowRedirect = false;
+
+// Toggle login/register
 function toggle() {
     document.getElementById("container").classList.toggle("active");
 }
 
-// Login function → go to surprise.html if form is filled
+/* =======================
+   LOGIN
+======================= */
 function login() {
-    // Get login form inputs
     const container = document.getElementById("container");
     const username = container.querySelector(".login input[type='text']").value.trim();
     const password = container.querySelector(".login input[type='password']").value.trim();
 
     if (username === "" || password === "") {
-        alert("Please enter both username and password to login!");
-    } else {
-        // All fields filled, go to surprise.html
+        alert("Please enter username and password!");
+        return;
+    }
+
+    // Reset state
+    allowRedirect = false;
+    document.getElementById("keyError").textContent = "";
+    document.getElementById("encryptionKey").value = "";
+
+    // Open encryption popup
+    document.getElementById("keyModal").style.display = "flex";
+}
+
+/* =======================
+   VERIFY ENCRYPTION KEY
+======================= */
+function verifyKey() {
+    const key = document.getElementById("encryptionKey").value.trim();
+    const error = document.getElementById("keyError");
+
+    if (key === "") {
+        error.textContent = "⚠️ Please enter encryption key!";
+        return;
+    }
+
+    if (key === "2122") {
+        allowRedirect = true;
+        closeKeyModal();
+
+        // Redirect only after verification
         window.location.href = "surprise.html";
+    } else {
+        allowRedirect = false;
+        error.textContent = "❌ Wrong encryption key!";
     }
 }
 
-// Register function → show success alert, then switch to Login form
+/* =======================
+   CLOSE POPUP
+======================= */
+function closeKeyModal() {
+    document.getElementById("keyModal").style.display = "none";
+    document.getElementById("encryptionKey").value = "";
+    document.getElementById("keyError").textContent = "";
+}
+
+/* =======================
+   REGISTER
+======================= */
 function register() {
     const container = document.getElementById("container");
     const username = container.querySelector(".register input[type='text']").value.trim();
@@ -27,8 +71,9 @@ function register() {
 
     if (username === "" || email === "" || password === "") {
         alert("Please fill all registration fields!");
-    } else {
-        alert("Registration successful!");
-        toggle(); // Switch to login form
+        return;
     }
+
+    alert("Registration successful!");
+    toggle();
 }
