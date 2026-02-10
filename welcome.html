@@ -2,43 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome</title>
+    <title>Login | Signup</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="landing-body">
+<body>
 
+<h1 class="main-title">Login | Signup</h1>
 
-<!-- NAVBAR -->
-<header class="navbar">
-    <div class="logo">WooahH</div>
-    <nav>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Contact</a>
-    </nav>
-</header>
+<div class="container" id="container">
 
-<!-- HERO SECTION -->
-<section class="hero">
-    <div class="hero-content">
-        <h1>Welcome to The World of Mysteries</h1>
-        <p>Discover amazing experience and create lasting memories</p>
-        <button onclick="goToLogin()">Get Started</button>
+    <!-- LOGIN FORM -->
+    <div class="form-box login">
+        <h2>Login</h2>
+        <input type="text" placeholder="Username">
+        <input type="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <p>Don’t have an account?
+            <span onclick="toggle()">Register</span>
+        </p>
     </div>
-</section>
 
-<!-- FOOTER -->
+    <!-- REGISTER FORM -->
+    <div class="form-box register">
+        <h2>Register</h2>
+        <input type="text" placeholder="Username">
+        <input type="email" placeholder="Email">
+        <input type="password" placeholder="Password">
+        <button onclick="register()">Register</button>
+        <p>Already have an account?
+            <span onclick="toggle()">Login</span>
+        </p>
+    </div>
+
+    <!-- OVERLAY -->
+    <div class="overlay">
+        <div>
+            <h2>WELCOME</h2>
+            <p>Create your account or login to continue.</p>
+        </div>
+    </div>
+
+</div>
+
 <footer class="footer">
-    © <span id="year"></span> @ViperSir. All Rights Reserved.
+    © <span id="year"></span> <span class="brand">@ViperSir</span>. All Rights Reserved.
 </footer>
+
+<script src="script.js"></script>
 
 <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-
-    function goToLogin() {
-        window.location.href = "index.html"; // login/signup page
-    }
 </script>
 
 </body>
