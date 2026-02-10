@@ -1,0 +1,335 @@
+/* GOOGLE FONT */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* =======================
+   COMMON BODY
+======================= */
+body {
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #0f2027, #000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+/* =======================
+   WELCOME PAGE (OLD)
+======================= */
+.welcome-body {
+    background: radial-gradient(circle at top, #0f2027, #000);
+}
+
+.welcome-box {
+    background: #12131a;
+    padding: 50px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(0,255,255,0.4);
+}
+
+.welcome-box h1 {
+    margin-bottom: 10px;
+}
+
+.welcome-box p {
+    color: #ccc;
+    margin-bottom: 25px;
+}
+
+.welcome-box button {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(45deg, #00ffff, #ff00ff);
+    color: black;
+    box-shadow: 0 0 15px rgba(0,255,255,0.6);
+}
+
+/* =======================
+   LOGIN / SIGNUP TITLE
+======================= */
+.main-title {
+    position: absolute;
+    top: 40px;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+/* =======================
+   CONTAINER
+======================= */
+.container {
+    position: relative;
+    width: 800px;
+    height: 420px;
+    background: #12131a;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(0,255,255,0.35);
+}
+
+/* =======================
+   FORM BOX
+======================= */
+.form-box {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    padding: 40px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-box h2 {
+    margin-bottom: 25px;
+}
+
+/* INPUTS */
+.form-box input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #00ffff;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    color: white;
+    outline: none;
+}
+
+.form-box input::placeholder {
+    color: #aaa;
+}
+
+/* BUTTON */
+.form-box button {
+    margin-top: 15px;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    background: linear-gradient(45deg, #00ffff, #ff00ff);
+    color: black;
+    box-shadow: 0 0 15px rgba(0,255,255,0.6);
+}
+
+/* SWITCH TEXT */
+.form-box p {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.form-box span {
+    color: #00ffff;
+    cursor: pointer;
+}
+
+/* LOGIN FORM */
+.login {
+    left: 0;
+}
+
+/* REGISTER FORM */
+.register {
+    left: 50%;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* OVERLAY */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(135deg, #00ffff, #ff00ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+    transition: 0.6s ease;
+    z-index: 1;
+}
+
+.overlay h2 {
+    color: black;
+    margin-bottom: 10px;
+}
+
+.overlay p {
+    color: black;
+    font-size: 14px;
+}
+
+/* ACTIVE STATE */
+.container.active .overlay {
+    left: 0;
+}
+
+.container.active .login {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.container.active .register {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* RESPONSIVE */
+@media (max-width: 850px) {
+    .container {
+        width: 95%;
+        height: auto;
+    }
+}
+
+/* =======================
+   GLOBAL FOOTER
+======================= */
+.footer {
+    position: fixed;
+    bottom: 15px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+    color: #aaa;
+    letter-spacing: 0.5px;
+    z-index: 999;
+}
+
+.footer .brand {
+    color: #00ffff;
+    font-weight: 500;
+}
+
+/* =======================
+   LANDING PAGE (NEW)
+======================= */
+
+/* Prevent login flex layout */
+.landing-body {
+    display: block;
+    min-height: 100vh;
+    background: none;
+}
+
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+}
+
+.navbar .logo {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.navbar nav a {
+    margin-left: 25px;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+}
+
+.navbar nav a:hover {
+    color: #00ffff;
+}
+
+/* HERO SECTION – LOCAL IMAGE */
+.hero {
+    height: 100vh;
+    background: linear-gradient(
+        rgba(0,0,0,0.55),
+        rgba(0,0,0,0.75)
+    ),
+    url("images/hero-bg.jpg") no-repeat center center / cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.hero-content p {
+    font-size: 16px;
+    color: #ddd;
+    margin-bottom: 30px;
+}
+
+.hero-content button {
+    padding: 14px 36px;
+    border: none;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(45deg, #00ffff, #ff00ff);
+    color: black;
+    box-shadow: 0 0 18px rgba(0,255,255,0.6);
+}
+
+/* LANDING RESPONSIVE */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 34px;
+    }
+
+    .navbar {
+        padding: 15px 25px;
+    }
+}
+/* =======================
+   IMAGE GALLERY 7x4 GRID
+======================= */
+.image-gallery-section {
+    position: absolute;
+    top: 80px;             /* navbar height */
+    bottom: 60px;          /* footer height */
+    left: 0;
+    right: 0;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);  /* 7 columns */
+    grid-template-rows: repeat(4, 1fr);     /* 4 rows */
+    gap: 0;                                /* no gap */
+    overflow: hidden;                      /* hide overflow */
+    padding: 0;
+}
+
+.image-gallery-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* fill cell while keeping aspect ratio */
+    display: block;
+}
+
+
