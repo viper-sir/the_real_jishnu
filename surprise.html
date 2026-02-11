@@ -387,11 +387,24 @@ canvas {
     box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
 }
 
+/* Update your existing .ttt-grid to include position: relative */
 .ttt-grid {
     display: grid;
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);
     gap: 10px;
+    position: relative; /* This allows the line to sit on top of the grid */
+}
+
+/* Add this new block anywhere in your <style> section */
+.winning-line {
+    position: absolute;
+    background-color: #ff4d6d;
+    display: none; 
+    z-index: 5;
+    border-radius: 5px;
+    box-shadow: 0 0 15px #ff4d6d;
+    pointer-events: none; /* This ensures the line doesn't block clicks */
 }
 
 .cell {
@@ -495,16 +508,18 @@ canvas {
         <h2 style="font-family: 'Dancing Script'; font-size: 2.5rem; color: #00ffff; margin-bottom: 10px;">Love Match</h2>
         <div id="status" style="margin-bottom: 15px; color: #ff4d6d; font-weight: 600;">❤️'s Turn</div>
         <div class="ttt-grid" id="board">
-            <div class="cell" data-index="0"></div>
-            <div class="cell" data-index="1"></div>
-            <div class="cell" data-index="2"></div>
-            <div class="cell" data-index="3"></div>
-            <div class="cell" data-index="4"></div>
-            <div class="cell" data-index="5"></div>
-            <div class="cell" data-index="6"></div>
-            <div class="cell" data-index="7"></div>
-            <div class="cell" data-index="8"></div>
-        </div>
+    <div class="cell" data-index="0"></div>
+    <div class="cell" data-index="1"></div>
+    <div class="cell" data-index="2"></div>
+    <div class="cell" data-index="3"></div>
+    <div class="cell" data-index="4"></div>
+    <div class="cell" data-index="5"></div>
+    <div class="cell" data-index="6"></div>
+    <div class="cell" data-index="7"></div>
+    <div class="cell" data-index="8"></div>
+    <div class="winning-line" id="winningLine"></div>
+</div>
+        
         <button class="q-btn" style="margin-top: 20px; background: #00ffff; color: #000;" onclick="resetGame()">Reset Game</button>
     </div>
 </div>
@@ -690,14 +705,24 @@ document.querySelectorAll('.cell').forEach(cell => {
 
 function checkResult() {
     let roundWon = false;
-    for (let condition of winningConditions) {
+    let winConditionIndex = null;
+
+    for (let i = 0; i < winningConditions.length; i++) {
+        const condition = winningConditions[i];
         let a = gameState[condition[0]], b = gameState[condition[1]], c = gameState[condition[2]];
-        if (a && a === b && a === c) { roundWon = true; break; }
+        
+        if (a === "" || b === "" || c === "") continue;
+        if (a === b && b === c) {
+            roundWon = true;
+            winConditionIndex = i;
+            break;
+        }
     }
 
     if (roundWon) {
         document.getElementById("status").innerText = `${currentPlayer} Wins! `;
         gameActive = false;
+        drawWinningLine(winConditionIndex); // This triggers the line
         return;
     }
 
@@ -710,11 +735,37 @@ function checkResult() {
     document.getElementById("status").innerText = `${currentPlayer}'s Turn`;
 }
 
+// Add this new function right below checkResult
+function drawWinningLine(index) {
+    const line = document.getElementById("winningLine");
+    line.style.display = "block";
+
+    const pos = [
+        { width: "100%", height: "4px", top: "15%", left: "0", transform: "none" },      // Row 0
+        { width: "100%", height: "4px", top: "48%", left: "0", transform: "none" },      // Row 1
+        { width: "100%", height: "4px", top: "82%", left: "0", transform: "none" },      // Row 2
+        { width: "4px", height: "100%", top: "0", left: "15%", transform: "none" },      // Col 0
+        { width: "4px", height: "100%", top: "0", left: "48%", transform: "none" },      // Col 1
+        { width: "4px", height: "100%", top: "0", left: "82%", transform: "none" },      // Col 2
+        { width: "135%", height: "4px", top: "50%", left: "-18%", transform: "rotate(45deg) translateY(-50%)" }, // Diag \
+        { width: "135%", height: "4px", top: "50%", left: "-18%", transform: "rotate(-45deg) translateY(-50%)" } // Diag /
+    ];
+
+    const p = pos[index];
+    line.style.width = p.width;
+    line.style.height = p.height;
+    line.style.top = p.top;
+    line.style.left = p.left;
+    line.style.transform = p.transform;
+}
+
+// Update your resetGame function to hide the line
 function resetGame() {
     currentPlayer = "❤️";
     gameState = ["", "", "", "", "", "", "", "", ""];
     gameActive = true;
     document.getElementById("status").innerText = "❤️'s Turn";
+    document.getElementById("winningLine").style.display = "none"; // Hide the line
     document.querySelectorAll('.cell').forEach(cell => {
         cell.innerText = "";
         cell.classList.remove('taken');
