@@ -2,43 +2,110 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome</title>
+    <title>Jishnu | Premium Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="landing-body">
 
+<body class="landing-body">
 
 <!-- NAVBAR -->
 <header class="navbar">
-    <div class="logo">WooahH</div>
+    <div class="logo">VIPER SIR</div>
     <nav>
         <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Contact</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
     </nav>
 </header>
 
-<!-- HERO SECTION -->
+<!-- HERO -->
 <section class="hero">
-    <div class="hero-content">
-        <h1>Welcome to The World of Mysteries</h1>
-        <p>Discover amazing experience and create lasting memories</p>
-        <button onclick="goToLogin()">Get Started</button>
+
+<div class="hero-container">
+
+    <div class="hero-text">
+        <h1>It's The World Of <span>The Real Jishnu</span></h1>
+
+        <p>
+            Passionate developer creating modern, interactive,
+            and user-friendly digital experiences.
+        </p>
+
+        <button onclick="scrollToSection()">Explore More</button>
     </div>
+
+</div>
+
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+    <h2>About Me</h2>
+
+    <p>
+        I am a creative web developer with strong interest in building
+        modern UI experiences, animations, and full-stack applications.
+        I enjoy solving problems and learning new technologies.
+    </p>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+
+<h2>My Projects</h2>
+
+<div class="project-container">
+
+    <div class="card">
+        <h3>Kerala Fishermen Marketplace</h3>
+        <p>
+            A digital marketplace connecting fishermen directly with customers,
+            enabling fresh seafood sales and real-time pricing.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>Automated Essay Grading System</h3>
+        <p>
+            AI-powered platform that evaluates essays automatically
+            using natural language processing techniques.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>Valentines Day Gift</h3>
+        <p>
+            A romantic interactive website designed to surprise and
+            delight loved ones with animations and messages.
+        </p>
+    </div>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+    <h2>Contact Me</h2>
+    <p>Email: jishnukumar2004@gmail.com</p>
 </section>
 
 <!-- FOOTER -->
 <footer class="footer">
-    © <span id="year"></span> @ViperSir. All Rights Reserved.
+    © <span id="year"></span> vipersir. All Rights Reserved.
 </footer>
 
 <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+document.getElementById("year").textContent =
+    new Date().getFullYear();
 
-    function goToLogin() {
-        window.location.href = "home.html"; // login/signup page
-    }
+function scrollToSection(){
+    document.getElementById("about")
+    .scrollIntoView({ behavior:"smooth" });
+}
 </script>
 
 </body>
